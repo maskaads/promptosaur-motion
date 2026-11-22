@@ -1,0 +1,5 @@
+Write run_log.md in this folder. Plain lists, no summary:
+1. Every tool, library and framework you used, and why you picked it.
+2. The steps you took, in order.
+3. Every problem you hit and how you fixed it.
+4. What you would still fix in the video if you had one more pass.

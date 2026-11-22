@@ -1,0 +1,33 @@
+Make a 15-second motion graphics opener for a YouTube channel called Promptosaur. Final file: final.mp4, 1920x1080, 30 fps, with sound.
+
+About the channel: tutorials and tests where AI models make motion graphics, animation and 3D. The audience is creators aged 18 to 35 who watch on a phone. The mascot is a small purple dinosaur at a laptop.
+
+Look:
+- Colors: background #14101F, purple #7C4DFF, yellow #FFD23F, off-white #F4F1EA. No other colors.
+- One font family for everything, a bold geometric sans. Two sizes only.
+- Flat vector shapes. No photos. No gradients on text.
+
+Motion:
+- Every move eases out: fast start, long settle. No linear moves.
+- No two elements start on the same frame. Offset them by 2 to 4 frames.
+- After each move, hold at least 12 frames so the text can be read.
+- A cut or a big change every 1.5 to 2.5 seconds.
+
+Structure:
+- 0 to 3 s: a command-line cursor blinks, then types the word "prompt".
+- 3 to 9 s: the word turns into three quick scenes: a motion graphics card, a 2D character, a 3D object. Two seconds each.
+- 9 to 13 s: the mascot dinosaur forms out of the shapes of the last scene.
+- 13 to 15 s: the name PROMPTOSAUR, one small final move, then a still hold.
+
+Sound: a short music bed that you make yourself in code, plus a sound effect on every cut and every text hit.
+
+Work in this order:
+1. Pick your tools yourself. Start from this empty folder.
+2. Build a first draft of the whole video.
+3. Export 8 frames from each scene as one contact sheet image and look at it.
+4. List what looks wrong: overlaps, text off screen, moves at one speed, empty frames.
+5. Fix the list, then render final.mp4.
+
+No AI image or video generators. Make everything with code.
+
+Do not ask me questions. Work until final.mp4 exists and plays.

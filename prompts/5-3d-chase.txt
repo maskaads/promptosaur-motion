@@ -1,0 +1,32 @@
+Make a 20-second 3D action scene. Final file: final.mp4, 1920x1080, 30 fps, with sound.
+
+The scene: a T. rex chases a food truck through a desert canyon at sunset.
+
+Shots:
+- Shot 1 (0 to 6 s): wide view from above and behind. The truck drives in, the T. rex runs in after it. Dust behind both.
+- Shot 2 (6 to 13 s): low camera at the side of the truck, level with the wheels, moving with it. The T. rex gains on the truck. Its jaws snap once, close to the back door.
+- Shot 3 (13 to 20 s): camera in front of the truck, looking back. The truck swerves around a fallen rock. The T. rex clips the rock, stumbles and falls behind.
+
+Physics rules:
+- Wheels spin at the speed of the road and always touch the ground.
+- The truck leans in the turn and bounces on bumps.
+- Each T. rex foot stays planted while it carries weight. The body dips on every step. The tail balances the head.
+- Dust starts at the wheels and the feet, grows, and fades in about 2 seconds.
+- The camera shakes a little on each T. rex step, more when the T. rex is close.
+
+Look: low sun from one side, long shadows, orange rock, haze in the distance. The truck has a readable sign on its side: DINO TACOS.
+
+Sound: engine, heavy footsteps in time with the feet, one roar, one tire screech on the swerve, music that speeds up.
+
+Tools: Three.js in a headless browser, rendered frame by frame and encoded to MP4 with ffmpeg. Build the models from code. No downloaded 3D models.
+
+Work in this order:
+1. Build the truck and the T. rex alone on a gray background. Render 8 frames of each in motion and look at them.
+2. Build the canyon and block the three shots.
+3. Animate. Render 8 frames per shot as a contact sheet and look at it.
+4. List what is wrong: floating wheels, sliding feet, objects through each other, camera inside rock, empty frames.
+5. Fix the list, then render final.mp4.
+
+No AI image or video generators. Make everything with code.
+
+Do not ask me questions. Work until final.mp4 exists and plays.

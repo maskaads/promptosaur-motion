@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="promptosaur-motion.md: one file in your project folder, read by Claude Fable 5.2 and Gemini 4 Hydrogen before they start. Seven sections and seven fixed sentences.">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#2B2442" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="45%" r="60%">
+      <stop offset="0" stop-color="#7C4DFF" stop-opacity="0.22"/>
+      <stop offset="0.6" stop-color="#7C4DFF" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#0C0916" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+      <stop offset="0.55" stop-color="#0C0916" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0C0916" stop-opacity="0.95"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+    <path id="spark" d="M0-10C1.2-2.4 2.4-1.2 10 0C2.4 1.2 1.2 2.4 0 10C-1.2 2.4-2.4 1.2-10 0C-2.4-1.2-1.2-2.4 0-10Z"/>
+    <g id="aster" stroke="#F08A4B" stroke-width="2.2" stroke-linecap="round">
+      <path d="M0-9V9M-9 0H9M-6.4-6.4L6.4 6.4M-6.4 6.4L6.4-6.4"/>
+    </g>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#A78BFA"/>
+    </marker>
+  </defs>
+
+  <style>
+    .sans { font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, Menlo, monospace; }
+    .anim { animation-duration: 12s; animation-iteration-count: infinite; animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(.16,1,.3,1); transform-box: fill-box; transform-origin: center; }
+
+    /* scene windows: 0-4.4 s, 4.0-8.4 s, 8.0-12 s */
+    .s1 { animation-name: s1; animation-timing-function: linear; }
+    .s2 { animation-name: s2; animation-timing-function: linear; }
+    .s3 { animation-name: s3; animation-timing-function: linear; }
+    @keyframes s1 { 0% {opacity:0} 3% {opacity:1} 33.3% {opacity:1} 36.7% {opacity:0} 100% {opacity:0} }
+    @keyframes s2 { 0%,33.3% {opacity:0} 36.7% {opacity:1} 66.7% {opacity:1} 70% {opacity:0} 100% {opacity:0} }
+    @keyframes s3 { 0%,66.7% {opacity:0} 70% {opacity:1} 95.5% {opacity:1} 100% {opacity:0} }
+
+    /* element entrances: in over 6 % of the loop, hold, reset at 46 % while the scene is hidden */
+    .rise { animation-name: rise; }
+    @keyframes rise { 0% {opacity:0; transform:translateY(22px)} 6%,45% {opacity:1; transform:none} 46%,100% {opacity:0; transform:translateY(22px)} }
+    .fromleft { animation-name: fromleft; }
+    @keyframes fromleft { 0% {opacity:0; transform:translateX(-36px)} 6%,45% {opacity:1; transform:none} 46%,100% {opacity:0; transform:translateX(-36px)} }
+    .fromright { animation-name: fromright; }
+    @keyframes fromright { 0% {opacity:0; transform:translateX(48px)} 6%,45% {opacity:1; transform:none} 46%,100% {opacity:0; transform:translateX(48px)} }
+    .drop { animation-name: drop; }
+    @keyframes drop { 0% {opacity:0; transform:translate(-40px,-250px) rotate(-14deg)} 1.5% {opacity:1} 9%,45% {opacity:1; transform:none} 46%,100% {opacity:0; transform:translate(-40px,-250px) rotate(-14deg)} }
+    .pop { animation-name: pop; }
+    @keyframes pop { 0% {opacity:0; transform:scale(.55)} 7%,45% {opacity:1; transform:none} 46%,100% {opacity:0; transform:scale(.55)} }
+    .lit { animation-name: lit; }
+    @keyframes lit { 0% {opacity:.28; transform:scale(.94)} 4%,45% {opacity:1; transform:none} 46%,100% {opacity:.28; transform:scale(.94)} }
+    .bar { animation-name: bar; transform-origin: left center; }
+    @keyframes bar { 0% {opacity:0; transform:scaleX(0)} 4%,45% {opacity:1; transform:none} 46%,100% {opacity:0; transform:scaleX(0)} }
+    .draw { animation-name: draw; stroke-dasharray: 130; }
+    @keyframes draw { 0% {stroke-dashoffset:130} 5%,45% {stroke-dashoffset:0} 46%,100% {stroke-dashoffset:130} }
+    .caret { animation: caret 1s steps(1) infinite; }
+    @keyframes caret { 0% {opacity:1} 50% {opacity:0} }
+    .breathe { animation: breathe 6s ease-in-out infinite; }
+    @keyframes breathe { 0%,100% {opacity:.75} 50% {opacity:1} }
+
+    @media (prefers-reduced-motion: reduce) {
+      .anim, .caret, .breathe { animation: none !important; }
+      .s2, .s3 { opacity: 0; }
+    }
+  </style>
+
+  <!-- backdrop -->
+  <rect width="1280" height="640" fill="#0C0916"/>
+  <rect width="1280" height="640" fill="url(#grid)" opacity="0.55"/>
+  <rect class="breathe" width="1280" height="640" fill="url(#glow)"/>
+  <rect width="1280" height="640" fill="url(#vignette)"/>
+
+  <!-- persistent brand -->
+  <g transform="translate(56 52)">
+    <rect x="-16" y="-16" width="32" height="32" rx="8" fill="#241C3E" stroke="#4A3B80"/>
+    <use href="#spark" fill="#9B7BFF" transform="scale(.9)"/>
+    <text x="30" y="6" class="sans" font-size="19" font-weight="700" fill="#F4F1EA">promptosaur</text>
+  </g>
+  <text x="1224" y="58" text-anchor="end" class="mono" font-size="14" fill="#7D72A3">free skill · v1</text>
+
+  <!-- ============ SCENE 1: drop the file into your project ============ -->
+  <g class="anim s1">
+    <g transform="translate(250 150)">
+      <g class="anim rise" style="animation-delay:.1s">
+        <path d="M0 26a14 14 0 0 1 14-14h96l20 20h178a14 14 0 0 1 14 14v226a14 14 0 0 1-14 14H14A14 14 0 0 1 0 272Z" fill="#221A3A" stroke="#3B2F63" stroke-width="1.5"/>
+        <text x="24" y="66" class="mono" font-size="15" fill="#8C80B5">my-project/</text>
+      </g>
+      <g transform="translate(150 40)">
+        <g class="anim drop" style="animation-delay:.55s">
+          <g filter="url(#shadow)">
+            <rect width="148" height="190" rx="9" fill="#F4F1EA"/>
+            <text x="16" y="30" class="sans" font-size="15" font-weight="700" fill="#14101F">promptosaur-</text>
+            <text x="16" y="49" class="sans" font-size="15" font-weight="700" fill="#14101F">motion.md</text>
+            <g fill="#A98CFF">
+              <rect x="16" y="66" width="112" height="6" rx="3"/>
+              <rect x="16" y="82" width="92" height="6" rx="3"/>
+              <rect x="16" y="98" width="104" height="6" rx="3"/>
+              <rect x="16" y="114" width="70" height="6" rx="3"/>
+              <rect x="16" y="130" width="98" height="6" rx="3"/>
+              <rect x="16" y="146" width="56" height="6" rx="3"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g class="anim rise" style="animation-delay:.1s">
+        <path d="M0 170h322v102a14 14 0 0 1-14 14H14A14 14 0 0 1 0 272Z" fill="#2A2050" fill-opacity=".94" stroke="#43357A" stroke-width="1.5"/>
+      </g>
+    </g>
+
+    <path class="anim fromleft" style="animation-delay:1.55s" d="M612 296H720" fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round" marker-end="url(#head)"/>
+
+    <g transform="translate(750 238)">
+      <g class="anim lit" style="animation-delay:1.9s">
+        <rect width="214" height="50" rx="25" fill="#8B6CF0"/>
+        <use href="#aster" transform="translate(32 25)"/>
+        <text x="56" y="33" class="sans" font-size="21" font-weight="700" fill="#FFFFFF">Fable 5.2</text>
+      </g>
+    </g>
+    <g transform="translate(750 306)">
+      <g class="anim lit" style="animation-delay:2.15s">
+        <rect width="214" height="50" rx="25" fill="#F4F1EA"/>
+        <use href="#spark" fill="#7C4DFF" transform="translate(32 25)"/>
+        <text x="56" y="33" class="sans" font-size="21" font-weight="700" fill="#14101F">Hydrogen</text>
+      </g>
+    </g>
+
+    <g class="anim rise" style="animation-delay:2.5s">
+      <text x="640" y="536" text-anchor="middle" class="sans" font-size="30" font-weight="700" fill="#F4F1EA">One file in your project folder.</text>
+      <text x="640" y="574" text-anchor="middle" class="mono" font-size="17" fill="#9A8FC2">“Read promptosaur-motion.md first.”<tspan class="caret" fill="#FFD23F"> ▍</tspan></text>
+    </g>
+  </g>
+
+  <!-- ============ SCENE 2: what is inside ============ -->
+  <g class="anim s2">
+    <g transform="translate(330 112)">
+      <g class="anim rise" style="animation-delay:4.15s">
+        <g filter="url(#shadow)">
+          <rect width="620" height="372" rx="14" fill="#1A1430" stroke="#3B2F63" stroke-width="1.5"/>
+        </g>
+        <circle cx="26" cy="26" r="6" fill="#E5534B"/>
+        <circle cx="46" cy="26" r="6" fill="#FFD23F"/>
+        <circle cx="66" cy="26" r="6" fill="#7C4DFF"/>
+        <text x="90" y="31" class="mono" font-size="14" fill="#6E6393">promptosaur-motion.md</text>
+        <line x1="0" y1="52" x2="620" y2="52" stroke="#2F2650"/>
+      </g>
+      <g transform="translate(22 72)">
+        <g class="anim bar" style="animation-delay:4.75s"><rect width="576" height="34" rx="5" fill="#FFD23F" fill-opacity=".16"/></g>
+      </g>
+      <g transform="translate(22 114)"><g class="anim bar" style="animation-delay:4.98s"><rect width="576" height="34" rx="5" fill="#FFD23F" fill-opacity=".16"/></g></g>
+      <g transform="translate(22 156)"><g class="anim bar" style="animation-delay:5.21s"><rect width="576" height="34" rx="5" fill="#FFD23F" fill-opacity=".16"/></g></g>
+      <g transform="translate(22 198)"><g class="anim bar" style="animation-delay:5.44s"><rect width="576" height="34" rx="5" fill="#FFD23F" fill-opacity=".16"/></g></g>
+      <g transform="translate(22 240)"><g class="anim bar" style="animation-delay:5.67s"><rect width="576" height="34" rx="5" fill="#FFD23F" fill-opacity=".16"/></g></g>
+      <g transform="translate(22 282)"><g class="anim bar" style="animation-delay:5.90s"><rect width="576" height="34" rx="5" fill="#FFD23F" fill-opacity=".16"/></g></g>
+      <g transform="translate(22 324)"><g class="anim bar" style="animation-delay:6.13s"><rect width="576" height="34" rx="5" fill="#FFD23F" fill-opacity=".16"/></g></g>
+      <g class="anim rise" style="animation-delay:4.3s">
+        <g class="mono" font-size="19" fill="#E9E4F7">
+          <text x="38" y="95"><tspan fill="#FFD23F">1.</tspan> Order of work (always)</text>
+          <text x="38" y="137"><tspan fill="#FFD23F">2.</tspan> Motion rules (all styles)</text>
+          <text x="38" y="179"><tspan fill="#FFD23F">3.</tspan> Style: motion graphics opener</text>
+          <text x="38" y="221"><tspan fill="#FFD23F">4.</tspan> Style: explainer on a voice-over</text>
+          <text x="38" y="263"><tspan fill="#FFD23F">5.</tspan> Style: 3D cartoon</text>
+          <text x="38" y="305"><tspan fill="#FFD23F">6.</tspan> Style: 3D action scene</text>
+          <text x="38" y="347"><tspan fill="#FFD23F">7.</tspan> Self-check before you say you are done</text>
+        </g>
+      </g>
+    </g>
+    <g class="anim rise" style="animation-delay:6.5s">
+      <text x="640" y="548" text-anchor="middle" class="sans" font-size="26" font-weight="700" fill="#F4F1EA">Every rule came from a broken render.</text>
+    </g>
+  </g>
+
+  <!-- ============ SCENE 3: seven fixed sentences ============ -->
+  <g class="anim s3">
+    <g transform="translate(250 330)">
+      <g class="anim pop" style="animation-delay:8.35s">
+        <text x="0" y="40" text-anchor="middle" class="sans" font-size="230" font-weight="300" fill="#FFD23F" filter="url(#soft)">7</text>
+      </g>
+    </g>
+    <g class="anim rise" style="animation-delay:8.6s">
+      <text x="250" y="420" text-anchor="middle" class="mono" font-size="18" fill="#9A8FC2">fixed sentences</text>
+    </g>
+
+    <g transform="translate(470 142)">
+      <g class="anim fromright" style="animation-delay:8.9s">
+        <rect width="700" height="92" rx="12" fill="#1E1736" stroke="#43357A" stroke-width="1.5"/>
+        <text x="26" y="40" class="sans" font-size="23" font-weight="700" fill="#F4F1EA">Every visual change starts on the</text>
+        <text x="26" y="70" class="sans" font-size="23" font-weight="700" fill="#F4F1EA">first frame of its word.</text>
+        <text x="676" y="54" text-anchor="end" class="mono" font-size="14" fill="#FFD23F">round 3</text>
+      </g>
+    </g>
+    <g transform="translate(470 250)">
+      <g class="anim fromright" style="animation-delay:9.2s">
+        <rect width="700" height="92" rx="12" fill="#1E1736" stroke="#43357A" stroke-width="1.5"/>
+        <text x="26" y="40" class="sans" font-size="23" font-weight="700" fill="#F4F1EA">Feet stay planted on every step,</text>
+        <text x="26" y="70" class="sans" font-size="23" font-weight="700" fill="#F4F1EA">including the last one.</text>
+        <text x="676" y="54" text-anchor="end" class="mono" font-size="14" fill="#FFD23F">round 4</text>
+      </g>
+    </g>
+    <g transform="translate(470 358)">
+      <g class="anim fromright" style="animation-delay:9.5s">
+        <rect width="700" height="92" rx="12" fill="#1E1736" stroke="#43357A" stroke-width="1.5"/>
+        <text x="26" y="40" class="sans" font-size="23" font-weight="700" fill="#F4F1EA">Align the words to the text, then check</text>
+        <text x="26" y="70" class="sans" font-size="23" font-weight="700" fill="#F4F1EA">the frame of every number.</text>
+        <text x="676" y="54" text-anchor="end" class="mono" font-size="14" fill="#FFD23F">round 3</text>
+      </g>
+    </g>
+    <g class="anim rise" style="animation-delay:9.9s">
+      <text x="496" y="498" class="mono" font-size="16" fill="#8C80B5">+ 4 more in the file, and a line you add each time something breaks</text>
+    </g>
+  </g>
+</svg>

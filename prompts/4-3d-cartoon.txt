@@ -1,0 +1,32 @@
+Make a 20-second 3D cartoon. Final file: final.mp4, 1920x1080, 30 fps, with sound.
+
+Story, four beats:
+- 0 to 5 s: a jungle at night. A baby dinosaur walks in from the left and stops. Something glows in the grass.
+- 5 to 10 s: it is an open laptop. The dinosaur leans in, tilts its head and blinks twice.
+- 10 to 15 s: it presses one key with one claw.
+- 15 to 20 s: the screen flashes and the whole jungle lights up in color. The dinosaur looks up and smiles.
+
+Character: body 3 heads tall, big head, eyes one third of the face, short arms, thick tail. Purple #7C4DFF with a lighter belly. It needs a walk cycle (legs alternate, body bobs, tail swings), a blink and a head tilt. Feet stay planted on every step.
+
+Camera, three shots:
+- Shot 1 (0 to 5 s): wide, 24 mm look, slow push in.
+- Shot 2 (5 to 15 s): medium, at the dinosaur's eye level, 50 mm look, the laptop in the foreground.
+- Shot 3 (15 to 20 s): low angle looking up, pulling back as the lights come on.
+The camera stays outside solid objects.
+
+Light: before the key press, only moonlight (blue, dim) and the laptop glow (cold white) on the dinosaur's face. After it, warm colored lights across the trees.
+
+Sound: night ambience, soft footsteps, one key click, a rising musical swell at the end. Make the sounds yourself in code.
+
+Tools: Three.js in a headless browser, rendered frame by frame and encoded to MP4 with ffmpeg. Build the models from code. No downloaded 3D models.
+
+Work in this order:
+1. Build the dinosaur alone on a gray background. Render 8 frames of it from 8 sides and look at them. Fix the proportions before anything else.
+2. Build the set and block the three shots with a static character.
+3. Add the animation. Render 8 frames per shot as a contact sheet and look at it.
+4. List what is wrong: sliding feet, limbs through the body, camera inside objects, dark or empty frames.
+5. Fix the list, then render final.mp4.
+
+No AI image or video generators. Make everything with code.
+
+Do not ask me questions. Work until final.mp4 exists and plays.

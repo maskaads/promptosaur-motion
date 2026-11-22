@@ -1,0 +1,1 @@
+Read promptosaur-motion.md in this folder first and follow it. Then make a 20-second 3D cartoon: a baby dinosaur finds a laptop in the jungle at night, presses one key, and the whole jungle lights up. Save it as final.mp4. No AI image or video generators. Make everything with code.

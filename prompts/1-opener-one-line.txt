@@ -1,0 +1,1 @@
+Make a 15-second motion graphics opener for a YouTube channel called Promptosaur. Save it as final.mp4. No AI image or video generators. Make everything with code.

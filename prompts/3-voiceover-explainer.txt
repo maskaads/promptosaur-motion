@@ -1,0 +1,23 @@
+You are the creative director of this video. This folder has voice.mp3 (a short voice-over) and voice.txt (its text).
+
+Make a Vox-style explainer that plays under this voice-over. Final file: final.mp4, 1920x1080, 30 fps, with the voice-over and sound design mixed in.
+
+Work in this order:
+1. Get word-level timestamps for voice.mp3 and save them as timing.json.
+2. Research how Vox-style explainers are built: paper textures, cut-out shapes, highlighter marks, maps and timelines, slow camera pushes, bold labels. Write the 6 rules you will follow into style.md.
+3. Write a shot list: one line per sentence of the voice-over, with start time, end time and what is on screen.
+4. Build a first draft of the full video.
+5. Export 8 frames per shot as a contact sheet and look at it. Check each shot against style.md.
+6. Fix what is wrong, then render final.mp4.
+
+Rules:
+- Every visual change starts on the first frame of the word it belongs to.
+- Every number in the voice-over appears on screen as a number at the moment it is spoken.
+- The main picture is one timeline that runs through the whole video. The camera moves along it.
+- Draw everything in code: SVG, canvas or CSS. No stock photos.
+- Add low music and a sound effect on each big change. The voice stays the loudest layer.
+- Pick your own tools.
+
+No AI image or video generators. Make everything with code.
+
+Do not ask me questions. Work until final.mp4 exists and plays.
