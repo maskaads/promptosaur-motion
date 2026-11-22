@@ -1,0 +1,6 @@
+# review.py, check_timeline.py, watchdog.py
+numpy
+pillow
+# align.py (forced alignment of a voice-over to its text)
+torch
+transformers

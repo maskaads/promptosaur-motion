@@ -4,13 +4,13 @@
 
 # promptosaur-motion
 
-One instruction file for AI agents that make videos with code. The model reads it before it starts. It covers motion graphics openers, explainers on a voice-over, 3D cartoons and 3D action scenes.
+One instruction file for AI agents that make videos with code, plus six small tools that check their work. The model reads the file before it starts. It covers motion graphics openers, explainers on a voice-over, 3D cartoons and 3D action scenes.
 
 It comes from the Promptosaur test **Claude Fable 5.2 vs Gemini 4 Hydrogen**: [watch the video](https://youtu.be/Bw7ly7Dsntc). Both models got the same five jobs. Every sentence that fixed a broken result went into this file.
 
 ## Quick start
 
-1. Download [`promptosaur-motion.md`](promptosaur-motion.md) and put it into your project folder.
+1. Download [`promptosaur-motion.md`](promptosaur-motion.md) and put it into your project folder. Copy the [`tools/`](tools) folder next to it if you want the checks (optional).
 2. Start your prompt with:
 
    ```
@@ -21,25 +21,57 @@ It comes from the Promptosaur test **Claude Fable 5.2 vs Gemini 4 Hydrogen**: [w
 
 That works with any agent that can read files: Claude Code, Gemini in Antigravity or Gemini CLI, Codex, Cursor.
 
-**Claude Code as a skill.** Copy the folder [`skills/promptosaur-motion`](skills/promptosaur-motion) into `.claude/skills/` of your project, or into `~/.claude/skills/` for all projects. Claude then loads it by itself whenever you ask for a video made with code.
+**Claude Code as a skill.** Copy the skill folder and the tools into `~/.claude/skills/` (all projects) or `.claude/skills/` of one project. Claude then loads it by itself whenever you ask for a video made with code.
 
 ```
 git clone https://github.com/maskaads/promptosaur-motion
 cp -r promptosaur-motion/skills/promptosaur-motion ~/.claude/skills/
+cp -r promptosaur-motion/tools ~/.claude/skills/promptosaur-motion/
+cd ~/.claude/skills/promptosaur-motion/tools && npm install && pip install -r requirements.txt
 ```
 
-## What is inside
+## What is inside the file
 
 | Section | What it does |
 |---|---|
-| 1. Order of work | `plan.md` with a shot list in seconds, a full rough draft, contact sheets of 8 frames per shot, a fix list, a timed test frame, then the final render |
-| 2. Motion rules | ease-out on every move, 2 to 4 frames between starts, 12-frame holds, a change every 1.5 to 2.5 s, 4 colors, one font |
-| 3. Motion graphics opener | beats, one main object per scene, scenes linked by shape, a still final card |
-| 4. Explainer on a voice-over | word timestamps by forced alignment, one shot line per sentence, every number on screen on its word |
-| 5. 3D cartoon | the character in numbers, built alone on gray and checked from 8 sides, planted feet, three shots with lenses |
-| 6. 3D action scene | wheels that touch the road, planted feet under weight, dust from contact points, camera shake by distance |
-| 7. Self-check | nine questions the model answers on its own frames before it says it is done |
-| 8. Fix sentences | seven sentences from the test, plus the ones you add |
+| 1. Order of work | `plan.md`, a `timeline.json` that drives every move, a full rough draft, contact sheets of 8 frames per shot, a fix list, a timed test frame, then the final render |
+| 2. Motion rules | ease-out on every move, 2 to 4 frames between starts, 12-frame holds, 1 s per 3 words of text, a change every 1.5 to 2.5 s; sound at -14 LUFS with the voice on top |
+| 3. Motion graphics opener | beats, one main object per scene, scenes linked by shape, morphs in one piece, a still final card |
+| 4. Explainer on a voice-over | forced alignment to the script, `frame = round(start * fps)`, every number on screen on its word |
+| 5. 3D cartoon | the character in numbers, IK-pinned feet, a camera that checks itself against every solid, face brightness and highlight limits |
+| 6. 3D action scene | wheels turned by distance, springs per axle, contact dust, seeded camera shake, logged gaps between bodies, cheap shadows |
+| 7. Self-check | nine questions the model answers on its own frames, each tied to a tool that measures it |
+| 8. Fix sentences | seven sentences from the video, one from the skill test below, plus the ones you add |
+
+## The tools
+
+Each one is a single file. Node 18+, Python 3.9+, ffmpeg on PATH.
+
+| Tool | What it does | Tested on |
+|---|---|---|
+| [`capture.mjs`](tools/capture.mjs) | films an HTML or SVG page frame by frame in headless Chrome. Time comes from the frame number (`window.renderFrame(frame, fps)`, CSS animations, `requestAnimationFrame`, `Date.now` all follow it), so two runs give the same video. Turns the GPU on, prints which GPU it got and warns when Chrome fell back to the processor. Skips frames that exist, so a crashed run resumes. `--encode final.mp4 --audio mix.wav` makes the file | the example opener (210 frames, 0.2 s a frame on an RTX 3060) and the animated SVG at the top of this page |
+| [`align.py`](tools/align.py) | word starts of a voice-over from its known text by forced alignment (wav2vec2 + Viterbi). Reads numbers the way they are spoken, prints the frame of every number | two synthetic voices with known word times: 38 of 55 and 24 of 27 words within 1 frame, 79 of 82 within 2. A Whisper transcript of the same audio: 13 of 55 within 1 frame, up to 20 frames off |
+| [`check_timeline.py`](tools/check_timeline.py) | reads `timeline.json` and reports same-frame starts, linear moves, missing holds, text too short to read, long stretches with nothing new, events off their word, spoken numbers with nothing on screen | caught a number placed 3 frames late and a number with no event |
+| [`check_layout.mjs`](tools/check_layout.mjs) | renders the page and measures every element marked `data-text` or `data-solid` on every second frame: text inside the 100 px edge margin, text over text, text over a shape that is not its own panel | found a label under a shape (frames 98 to 100) and a tagline over the title, both planted on purpose |
+| [`review.py`](tools/review.py) | `sheet`: 8 labelled frames per shot in one image. `frames`: empty, dark, burned and frozen frames. `final`: decodes the whole file, checks length, size, fps, pixel format, sound, loudness and true peak | its contact sheets found a shape poking through the prompt bar in the example opener |
+| [`watchdog.py`](tools/watchdog.py) | runs a render, kills it when no new frame appears for `--stall` seconds, starts it again | a render that hung after 3 of 6 frames was restarted and finished |
+
+[`examples/opener/`](examples/opener) is a 7-second opener built the way the file asks: `timeline.json` holds every move, `index.html` reads it in `renderFrame`. Film it with:
+
+```
+node tools/capture.mjs examples/opener/index.html --duration 7 --out frames --encode opener.mp4
+python tools/check_timeline.py examples/opener/timeline.json
+python tools/review.py sheet opener.mp4 --timeline examples/opener/timeline.json
+node tools/check_layout.mjs examples/opener/index.html --duration 7
+```
+
+## Skill test
+
+A fresh agent got only this file, the tools and one line: *"Read promptosaur-motion.md in this folder first and follow it. Then make a 10-second motion graphics opener for a YouTube channel called Promptosaur."* This is what came out:
+
+<p align="center"><img src="assets/skill-test.gif" alt="10-second opener made from a one-line prompt with this file: a prompt bar bends into a T-rex, which shrinks into the PROMPTOSAUR logo" width="720"></p>
+
+It took about 25 minutes. The finished file measured 10.00 s, 1920x1080, 30 fps, -14.3 LUFS, true peak -2.4 dBFS; `review.py frames` found 0 problems in 300 frames. On its way the agent caught an empty frame 0, a morph that jumped between frames 82 and 83 (an ease that returned -4e-16 instead of 0), a tagline over the title, flickering text and a true peak of -0.4 dBFS after AAC encoding. Its log also found problems in the tools themselves: the true peak was never measured, child processes opened console windows on Windows, Chrome's text smoothing changed between frames, and layout had no checker. All of that is fixed in this version, and the two lessons went into the file as fix sentence 8.
 
 ## The seven fixed sentences
 

@@ -1,0 +1,9 @@
+{
+  "name": "promptosaur-motion-tools",
+  "private": true,
+  "type": "module",
+  "description": "Frame-by-frame capture of HTML/SVG pages for promptosaur-motion",
+  "dependencies": {
+    "puppeteer-core": "^24.0.0"
+  }
+}

@@ -82,7 +82,7 @@
     <use href="#spark" fill="#9B7BFF" transform="scale(.9)"/>
     <text x="30" y="6" class="sans" font-size="19" font-weight="700" fill="#F4F1EA">promptosaur</text>
   </g>
-  <text x="1224" y="58" text-anchor="end" class="mono" font-size="14" fill="#7D72A3">free skill · v1</text>
+  <text x="1224" y="58" text-anchor="end" class="mono" font-size="14" fill="#7D72A3">free skill · v2</text>
 
   <!-- ============ SCENE 1: drop the file into your project ============ -->
   <g class="anim s1">
