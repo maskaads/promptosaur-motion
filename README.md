@@ -93,10 +93,10 @@ Costs are at API prices. The runs were on subscriptions, where the same tokens e
 |---|---|---|---|---|
 | 1 | 15 s opener, one-line prompt | about $9, 17 min | under $1.50, 7 min | Fable |
 | 2 | 15 s opener with a brief | about $10.50, 23 min | about $1.25, 6 min | Fable, by a little |
-| 3 | 20 s explainer on a voice-over | about $19, 51 min | about $2, 54 min | Fable |
+| 3 | 20 s explainer on a voice-over | about $19, 51 min | about $2.54, about 50 min | Fable |
 | 4 | 20 s 3D cartoon | about $18, 35 min | about $5, 27 min | Fable |
 | 5 | 20 s 3D chase | about $23, 43 min | about $2.25, 16 min | Fable |
-| | **All five** | **about $79, almost 3 h** | **about $12, under 2 h** | |
+| | **All five** | **about $79, almost 3 h** | **about $12.50, under 2 h** | |
 
 Then Hydrogen got this file and the one-line cartoon prompt with no brief. The feet stayed planted and the jungle lit up on the key press. It rendered on the graphics card and finished in 14.5 minutes for about $3, against 27 minutes and $5 with the full brief in round 4.
 
